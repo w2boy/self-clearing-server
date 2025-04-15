@@ -1,0 +1,54 @@
+.container {
+  width: auto;
+  max-width: 1000px;
+  padding: 0 15px;
+}
+
+.jumbotron {
+  padding-top: 0.75em;
+  padding-bottom: 0.5em;
+  margin-bottom: 1.5rem;
+}
+
+.navbar {
+  padding: 0;
+  margin-left: -0.5rem;
+}
+
+.identicon {
+  margin-left: 2.1rem;
+  margin-right: 2rem;
+}
+
+.jumbotron h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* scrollbar width */
+::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 3px;
+}
+
+/* scrollbar track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* scrollbar handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+/* scrollbar handle hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border-radius: 3px;
+}
+
+.row {
+  margin-top: 10px;
+}

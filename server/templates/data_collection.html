@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Data Collection ({{ hostname }}){% endblock %}
+
+{% block printer3d_state %}
+<h2>Data Collection</h2>
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<!-- <link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet"> -->
+{% endblock %}
+
+{% block page_content %}
+<div class="row">
+    <div class="col-12">
+        <img src="{{ url_for('home.video_feed') }}" width="100%">
+    </div>
+</div>
+
+<hr class="bg-secondary">
+
+<!-- Flats/Darks -->
+<div class="row">
+    <div class="col-12"><button type="button" class="btn btn-outline-info btn-block" id="flats-btn">Collect Flats and
+            Darks</button>
+    </div>
+</div>
+
+<!-- PIR -->
+<div class="row">
+    <div class="col-12"><button type="button" class="btn btn-outline-info btn-block" id="pir-btn">Run PIR Test</button>
+    </div>
+</div>
+
+<!-- Irradiance -->
+<div class="row">
+    <div class="col-12"><button type="button" class="btn btn-outline-info btn-block" id="irradiance-btn">Run Irrandiance
+            Correction Test</button>
+    </div>
+</div>
+
+<!-- Focus -->
+<div class="row">
+    <div class="col-12"><button type="button" class="btn btn-outline-info btn-block" id="focus-btn">Run Focus
+            Test</button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='lib/ajax-socket.io-4.7.5.min.js') }}"></script>
+{% endblock %}

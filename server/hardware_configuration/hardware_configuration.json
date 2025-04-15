@@ -1,0 +1,21 @@
+{
+    "camera": {
+        "dummy": false
+    },
+    "saved_positions": {},
+    "xyz": {},
+    "newmark": {
+        "dummy": false,
+        "vendor_id": 5824,
+        "product_id": 1155,
+        "serial_number": "16035840",
+        "baudrate": 115200
+    },
+    "gpio": {
+        "dummy": false,
+        "ring_light_pin": 15
+    },
+    "printer": {
+        "dummy": false
+    }
+}

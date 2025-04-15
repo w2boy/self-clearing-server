@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Home ({{ hostname }}){% endblock %}
+
+{% block printer3d_state %}
+<h2>Self-Clearing Timelapses</h2>
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block page_content %}
+
+<div class="row">
+    <div class="col-12">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-2">
+        <h5>Camera 2</h5>
+    </div>
+    <div class="col-4"><button type="button" class="btn btn-outline-info btn-block" id="turn-on-camera-btn">Turn On Camera 2</button>
+    </div>
+    <div class="col-4"><button type="button" class="btn btn-outline-info btn-block" id="turn-off-camera-btn">Turn Off Camera 2</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <img src="{{ url_for('camera_2.video_feed') }}" width="100%">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+    </div>
+</div>
+
+<br>
+
+<!-- Input Timelapse Name -->
+<div class="row">
+    <input type="text" id="timelapse-name-1" placeholder="Enter timelapse name">
+    <input type="text" id="timelapse-duration" placeholder="How many hours?">
+    <input type="text" id="timelapse-frequency" placeholder="# of seconds between pics?">
+</div>
+
+<div class="row">
+<br>
+    <div class="col-6"><button type="button" class="btn btn-outline-info btn-block" id="start-timelapse-btn">Start Timelapse 2</button>
+    </div>
+    <div class="col-6"><button type="button" class="btn btn-outline-info btn-block" id="stop-timelapse-btn">Stop Timelapse 2</button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <br>
+        
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='lib/ajax-socket.io-4.7.5.min.js') }}"></script>
+<script src="{{ url_for('static', filename='camera_2.js') }}"></script>
+{% endblock %}

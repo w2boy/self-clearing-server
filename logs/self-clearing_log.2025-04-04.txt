@@ -1,0 +1,22 @@
+2025-04-04 06:18:58.288 [ERROR]  werkzeug                        Error on request:
+Traceback (most recent call last):
+  File "/home/self-clearing/venv/lib/python3.11/site-packages/werkzeug/serving.py", line 363, in run_wsgi
+    execute(self.server.app)
+  File "/home/self-clearing/venv/lib/python3.11/site-packages/werkzeug/serving.py", line 327, in execute
+    write(data)
+  File "/home/self-clearing/venv/lib/python3.11/site-packages/werkzeug/serving.py", line 302, in write
+    self.wfile.write(data)
+  File "/usr/lib/python3.11/socketserver.py", line 834, in write
+    self._sock.sendall(b)
+OSError: [Errno 113] No route to host  
+2025-04-04 15:37:48.644 [ERROR]  werkzeug                        Error on request:
+Traceback (most recent call last):
+  File "/home/self-clearing/venv/lib/python3.11/site-packages/werkzeug/serving.py", line 363, in run_wsgi
+    execute(self.server.app)
+  File "/home/self-clearing/venv/lib/python3.11/site-packages/werkzeug/serving.py", line 327, in execute
+    write(data)
+  File "/home/self-clearing/venv/lib/python3.11/site-packages/werkzeug/serving.py", line 302, in write
+    self.wfile.write(data)
+  File "/usr/lib/python3.11/socketserver.py", line 834, in write
+    self._sock.sendall(b)
+OSError: [Errno 113] No route to host  

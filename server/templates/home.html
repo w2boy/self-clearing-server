@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Home ({{ hostname }}){% endblock %}
+
+{% block printer3d_state %}
+<h2>Self-Clearing Timelapses</h2>
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link href="{{ url_for('static', filename='home.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block page_content %}
+
+<!-- List timelapse directories-->
+
+<h1>Timelapse Folders</h1>
+
+<ul>
+    {% for directory in directories %}
+        <li>{{ directory }}</li>
+    {% endfor %}
+</ul>
+
+<br>
+<div class="col-2">
+    </div><input type="text" class="col-4" id="timelapse-directory" placeholder="Which timelapse do you want to download?">
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-4"><button type="button" class="btn btn-outline-info btn-block" id="download-timelapse-pics-btn">Download Timelapse Pictures</button>
+    </div>
+    <div class="col-4"></div><button type="button" class="printer-btn btn btn-sm btn-outline-danger" id="delete-directory-btn">Delete Folder</button>
+    <div class="col-4"></div>
+</div>
+
+<div class="row">
+    <div class="col-1">
+    </div>
+    <div class="col-4"><button type="button" class="btn btn-outline-info btn-block" id="create-and-download-timelapse-video-btn">Download Timelapse Video</button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='lib/ajax-socket.io-4.7.5.min.js') }}"></script>
+<script src="{{ url_for('static', filename='home.js') }}"></script>
+{% endblock %}
