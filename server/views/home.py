@@ -18,7 +18,7 @@ log.setLevel(logging.INFO)
 
 @blueprint.route("/")
 def index():
-    directory_path = '/home/self-clearing/Self_Clearing_Server/Timelapses'  # Replace with the actual path
+    directory_path = '/home/pi/self-clearing-server-github/Timelapses'  # Replace with the actual path
     all_items = os.listdir(directory_path)
     directories = [item for item in all_items if os.path.isdir(os.path.join(directory_path, item))]
     return render_template(
@@ -29,26 +29,26 @@ def index():
 @socketio.on("prepare-directory", namespace="/home")
 def prepare_directory(message):
     timelapse_directory = message["timelapse-directory"]
-    timelapse_path = "/home/self-clearing/Self_Clearing_Server/Timelapses"
+    timelapse_path = "/home/pi/self-clearing-server-github/Timelapses"
     
     if os.path.isdir(f"{timelapse_path}/{timelapse_directory}"):
-        shutil.make_archive(f"/home/self-clearing/Self_Clearing_Server/{timelapse_directory}", "zip", timelapse_path, timelapse_directory)
+        shutil.make_archive(f"/home/pi/self-clearing-server-github/{timelapse_directory}", "zip", timelapse_path, timelapse_directory)
         socketio.emit("download-ready", timelapse_directory, namespace="/home")
     else:
         socketio.emit("invalid-directory", namespace="/home")
 
 @blueprint.route("/download/<timelapse_directory>")
 def download_timelapse(timelapse_directory):
-    timelapse_path = "/home/self-clearing/Self_Clearing_Server/Timelapses"
-    zip_path = f"/home/self-clearing/Self_Clearing_Server/{timelapse_directory}.zip"
+    timelapse_path = "/home/pi/self-clearing-server-github/Timelapses"
+    zip_path = f"/home/pi/self-clearing-server-github/{timelapse_directory}.zip"
     # Serve the ZIP file
     return send_file(zip_path, as_attachment=True)
 
 @socketio.on("prepare-video", namespace="/home")
 def prepare_video(message):
-    timelapse_path = "/home/self-clearing/Self_Clearing_Server/Timelapses"
+    timelapse_path = "/home/pi/self-clearing-server-github/Timelapses"
     timelapse_directory = message["timelapse-directory"]
-    output_dir = "/home/self-clearing/Self_Clearing_Server/Timelapse_Videos"
+    output_dir = "/home/pi/self-clearing-server-github/Timelapse_Videos"
     frames_folder = timelapse_path + "/" + timelapse_directory
     if os.path.isdir(f"{timelapse_path}/{timelapse_directory}"):
         
@@ -82,22 +82,22 @@ def prepare_video(message):
 
 @blueprint.route("/download_video/<timelapse_directory>")
 def download_video(timelapse_directory):
-    timelapse_path = "/home/self-clearing/Self_Clearing_Server/Timelapse_Videos"
-    video_path = f"/home/self-clearing/Self_Clearing_Server/Timelapse_Videos/{timelapse_directory}.mp4"
+    timelapse_path = "/home/pi/self-clearing-server-github/Timelapse_Videos"
+    video_path = f"/home/pi/self-clearing-server-github/Timelapse_Videos/{timelapse_directory}.mp4"
     # Serve the mp4 file
     return send_file(video_path, as_attachment=True)
 
 @socketio.on("delete-directory", namespace="/home")
 def prepare_video(message):
     timelapse_directory = message["timelapse-directory"]
-    directory_path = "/home/self-clearing/Self_Clearing_Server/Timelapses/" + timelapse_directory
+    directory_path = "/home/pi/self-clearing-server-github/Timelapses/" + timelapse_directory
     if os.path.isdir(directory_path):
         shutil.rmtree(directory_path)
-        zip_path = f"/home/self-clearing/Self_Clearing_Server/{timelapse_directory}.zip"
+        zip_path = f"/home/pi/self-clearing-server-github/{timelapse_directory}.zip"
         if os.path.exists(zip_path):
             print(f"removed zip file: {timelapse_directory}.zip")
             os.remove(zip_path)
-        video_path = "/home/self-clearing/Self_Clearing_Server/Timelapse_Videos/" + timelapse_directory + ".mp4"
+        video_path = "/home/pi/self-clearing-server-github/Timelapse_Videos/" + timelapse_directory + ".mp4"
         print(video_path)
         if os.path.exists(video_path):
             print(f"removed video: {timelapse_directory}.mp4")

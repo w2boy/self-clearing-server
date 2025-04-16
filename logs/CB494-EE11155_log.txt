@@ -1,0 +1,18 @@
+2025-04-16 10:06:40.025 [ERROR]  server                          Exception on / [GET]  
+Traceback (most recent call last):
+  File "C:\Users\wwardle\Desktop\ProjectWiki\self-clearing-server\venv\Lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wwardle\Desktop\ProjectWiki\self-clearing-server\venv\Lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wwardle\Desktop\ProjectWiki\self-clearing-server\venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wwardle\Desktop\ProjectWiki\self-clearing-server\venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\wwardle\Desktop\ProjectWiki\self-clearing-server\server\views\home.py", line 22, in index
+    all_items = os.listdir(directory_path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] The system cannot find the path specified: '/home/self-clearing/Self_Clearing_Server/Timelapses'
