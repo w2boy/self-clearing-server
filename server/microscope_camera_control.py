@@ -23,6 +23,7 @@ class microscope_camera_control:
         self.timelapse_frequency = 60 # Default: A picture is taken every 60 seconds
         self.camera = None
         self.camera_is_on = False
+        self.frame_count = 1
         # Use Placeholder image to display at the beginning before the camera is ever turned on
         self.read_frame = cv2.imread('black.png',0)
         self.ret, self.buffer = cv2.imencode('.jpg', self.read_frame)
@@ -34,7 +35,7 @@ class microscope_camera_control:
         self.timelapse_thread = Thread(log=None, target=self.gen_frames, args=())
         self.timelapse_thread.start()
 
-    def add_frame_number(self, frame, count, font_path="arial.ttf", font_scale=1, font_color=(255, 255, 255), thickness=2):
+    def add_frame_number(self, frame, frame_count, font_path="arial.ttf", font_scale=1, font_color=(255, 255, 255), thickness=2):
         # Load the image
         if frame is None:
             print(f"Failed to load image: {image_path}")
@@ -44,7 +45,7 @@ class microscope_camera_control:
         height, width, _ = frame.shape
 
         # Define the text to be added
-        text = f"Frame {count}"
+        text = f"Frame {frame_count}"
 
         # Use OpenCV's putText for text rendering
         font = cv2.FONT_HERSHEY_SIMPLEX
@@ -71,7 +72,7 @@ class microscope_camera_control:
 
     def gen_frames(self):
         time_from_last_frame = 1
-        count = 1
+        self.frame_count = 1
         time_camera_started = time.time()
         while(self.camera.isOpened()):
             if (time.time() - time_camera_started > 3600):
@@ -85,9 +86,9 @@ class microscope_camera_control:
                 current_time = time.time()
                 if not self.stop_event.is_set() and ((current_time - self.time_timelapse_started) < self.timelapse_duration):
                     if ((current_time - time_from_last_frame) > self.timelapse_frequency):
-                        frame = self.add_frame_number(frame, count)
-                        cv2.imwrite(f"Timelapses/{self.timelapse_name}/{self.timelapse_name}_{count}.jpg", frame)
-                        count += 1
+                        frame = self.add_frame_number(frame, self.frame_count)
+                        cv2.imwrite(f"Timelapses/{self.timelapse_name}/{self.timelapse_name}_{self.frame_count}.jpg", frame)
+                        self.frame_count += 1
                         print(f"took a picture! (camera {self.camera_number})")
                         # Reset Timer
                         time_from_last_frame = current_time
@@ -106,6 +107,7 @@ class microscope_camera_control:
 
     def stop_timelapse(self):
         self.stop_event.set()
+        self.frame_count = 1
 
     def turn_camera_on(self):
         for microscope_camera in glob.glob("/dev/video*"):
